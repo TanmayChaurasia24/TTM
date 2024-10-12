@@ -1,45 +1,29 @@
-import { Hono } from 'hono'
-import { PrismaClient } from '@prisma/client/extension'
-import { withAccelerate } from '@prisma/extension-accelerate'
+// /src/app.ts
+import { Hono } from 'hono';
+import userRoutes from './routes/user.routes';
+import { authMiddleware } from './middleware/auth.middleware';
 
 const app = new Hono<{
   Bindings: {
-    DATABASE_URL: String
-  }
-}>()
+    DATABASE_URL: string;  
+    JWT_SECRET: string;
+  };
+}>();
 
-app.post('/api/signup', async (c) => {
-  const prisma = new PrismaClient({
-    datasourceUrl: c.env.DATABASE_URL,
-  }).$extends(withAccelerate)
+app.route('/api', userRoutes);
 
-  const body = await c.req.json();
+app.use('/blogs/*', authMiddleware);
 
-  const created_user = await prisma.user.create({
-    data: {
-      email: body.email,
-      password: body.password,
-    }
-  })
+app.post("/api/blogs", (c) => {
+  return c.text("Hello Hono!");
+});
 
+app.put("/api/blogs", (c) => {
+  return c.text("Hello Hono!");
+});
 
-  return c.text('Hello Hono!')
-})
+app.get("/api/blogs/:id", (c) => {
+  return c.text("Hello Hono!");
+});
 
-app.post('/api/signin', (c) => {
-  return c.text('Hello Hono!')
-})
-
-app.post('/api/blog', (c) => {
-  return c.text('Hello Hono!')
-})
-
-app.put('/api/blog', (c) => {
-  return c.text('Hello Hono!')
-})
-
-app.get('/api/blog/:id', (c) => {
-  return c.text('Hello Hono!')
-})
-
-export default app
+export default app;
