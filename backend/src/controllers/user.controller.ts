@@ -1,9 +1,7 @@
-// /src/controllers/userController.ts
-import { PrismaClient } from '@prisma/client';
 import { Context } from 'hono';
 import { sign } from 'hono/jwt';
+import prisma from '../prisma/client';
 
-const prisma = new PrismaClient();
 
 export const signup = async (c: Context) => {
   const body = await c.req.json();
@@ -24,7 +22,8 @@ export const signup = async (c: Context) => {
     const created_user = await prisma.user.create({
       data: {
         email: body.email,
-        password: body.password, // Remember to hash the password in production
+        password: body.password, 
+        username: body.username,
       },
     });
 
