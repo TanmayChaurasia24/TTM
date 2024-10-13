@@ -27,11 +27,12 @@ export const create_blog = async (c: Context) => {
   }
 
   try {
+    const author_id = c.get("userid");
     const created_blog = await prisma.post.create({
       data: {
         title: body.title,
         content: body.content,
-        authorId: "1",
+        authorId: author_id
       },
     });
 
@@ -115,7 +116,7 @@ export const update_blog = async (c: Context) => {
 };
 
 export const get_blog = async (c: Context) => {
-  const body = await c.req.json();
+  const body = await c.req.param("id");
   const prisma = new PrismaClient({
     datasourceUrl: c.env?.DATABASE_URL,
   }).$extends(withAccelerate());
@@ -123,7 +124,7 @@ export const get_blog = async (c: Context) => {
   try {
     const curr_blog = await prisma.post.findFirst({
       where: {
-        id: body.id,
+        id: body,
       },
     });
 

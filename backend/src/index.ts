@@ -10,8 +10,8 @@ const app = new Hono<{
   };
 }>();
 
-app.route('/api', userRoutes);
+app.route('/api/user', userRoutes);
 
-app.route('/api',blogsRoutes)
+app.route('/api/b',blogsRoutes)
 
 export default app;

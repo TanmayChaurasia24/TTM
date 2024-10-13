@@ -10,7 +10,7 @@ const blogsRoutes = new Hono<{
     };
   }>();
 
-blogsRoutes.use('/*',authMiddleware);
+blogsRoutes.use('/blogs/*',authMiddleware);
 
 blogsRoutes.post('/blogs',create_blog);
 blogsRoutes.put('/blogs',update_blog);

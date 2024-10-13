@@ -14,7 +14,8 @@ export const authMiddleware = async (c: any, next: any) => {
   try {
     const response = await verify(token, c.env.JWT_SECRET);
 
-    if (response.id) {
+    if (response) {
+      c.set("userid",response.id);
       await next();
     } else {
       return c.json({ error: "Unauthorized" }, 401);
