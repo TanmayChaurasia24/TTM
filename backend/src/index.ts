@@ -1,7 +1,7 @@
 // /src/app.ts
 import { Hono } from 'hono';
 import userRoutes from './routes/user.routes';
-import { authMiddleware } from './middleware/auth.middleware';
+import blogsRoutes from './routes/blog.route';
 
 const app = new Hono<{
   Bindings: {
@@ -12,18 +12,6 @@ const app = new Hono<{
 
 app.route('/api', userRoutes);
 
-app.use('/blogs/*', authMiddleware);
-
-app.post("/api/blogs", (c) => {
-  return c.text("Hello Hono!");
-});
-
-app.put("/api/blogs", (c) => {
-  return c.text("Hello Hono!");
-});
-
-app.get("/api/blogs/:id", (c) => {
-  return c.text("Hello Hono!");
-});
+app.route('/api',blogsRoutes)
 
 export default app;

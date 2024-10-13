@@ -1,28 +1,34 @@
-import { Context } from 'hono';
-import { sign } from 'hono/jwt';
-import prisma from '../prisma/client';
-
+import { Context } from "hono";
+import { sign } from "hono/jwt";
+import { PrismaClient } from "@prisma/client/edge";
+import { withAccelerate } from "@prisma/extension-accelerate";
 
 export const signup = async (c: Context) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env?.DATABASE_URL,
+  }).$extends(withAccelerate());
   const body = await c.req.json();
 
   if (!body.email || !body.password) {
-    return c.json({ message: "Please provide all credentials properly." }, 400);  
+    return c.json({ message: "Please provide all credentials properly." }, 400);
   }
 
-  const is_there = await prisma.user.findUnique({ 
+  const is_there = await prisma.user.findUnique({
     where: { email: body.email },
   });
 
   if (is_there) {
-    return c.json({ error: "User already exists. Sign up with a different email." }, 400);
+    return c.json(
+      { error: "User already exists. Sign up with a different email." },
+      400
+    );
   }
 
   try {
     const created_user = await prisma.user.create({
       data: {
         email: body.email,
-        password: body.password, 
+        password: body.password,
         username: body.username,
       },
     });
@@ -35,7 +41,10 @@ export const signup = async (c: Context) => {
   }
 };
 
-export const signin = async (c: Context) => {  
+export const signin = async (c: Context) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env?.DATABASE_URL,
+  }).$extends(withAccelerate());
   const body = await c.req.json();
 
   if (!body.email || !body.password) {
