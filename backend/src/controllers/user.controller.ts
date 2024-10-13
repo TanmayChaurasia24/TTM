@@ -2,12 +2,19 @@ import { Context } from "hono";
 import { sign } from "hono/jwt";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
+import { signinInput, signupInput } from "@tanmaykumarchaurasia/ttm-common"; 
 
 export const signup = async (c: Context) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env?.DATABASE_URL,
   }).$extends(withAccelerate());
   const body = await c.req.json();
+  const isvalid = signupInput.safeParse(body);
+
+  if(!isvalid) {
+    c.status(403)
+    return c.json({ error: "Invalid input" });
+  }
 
   if (!body.email || !body.password) {
     return c.json({ message: "Please provide all credentials properly." }, 400);
@@ -46,6 +53,12 @@ export const signin = async (c: Context) => {
     datasourceUrl: c.env?.DATABASE_URL,
   }).$extends(withAccelerate());
   const body = await c.req.json();
+  const isvalid = signupInput.safeParse(body);
+
+  if(!isvalid) {
+    c.status(403)
+    return c.json({ error: "Invalid input" });
+  }
 
   if (!body.email || !body.password) {
     return c.json({ message: "Please provide both email and password." }, 400);

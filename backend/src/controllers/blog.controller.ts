@@ -1,12 +1,20 @@
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { Context } from "hono";
+import { create_blog_input, update_blog_input } from "@tanmaykumarchaurasia/ttm-common";
 
 export const create_blog = async (c: Context) => {
-  const body = await c.req.json();
   const prisma = new PrismaClient({
     datasourceUrl: c.env?.DATABASE_URL,
   }).$extends(withAccelerate());
+  
+  const body = await c.req.json();
+  const isvalid = create_blog_input.safeParse(body);
+
+  if(!isvalid) {
+    c.status(403);
+    return c.json({ error: "Invalid request" });
+  }
 
   if (!body.title) {
     return c.json(
@@ -59,10 +67,17 @@ export const create_blog = async (c: Context) => {
 };
 
 export const update_blog = async (c: Context) => {
-  const body = await c.req.json();
   const prisma = new PrismaClient({
     datasourceUrl: c.env?.DATABASE_URL,
   }).$extends(withAccelerate());
+  
+  const body = await c.req.json();
+  const isvalid = update_blog_input.safeParse(body);
+
+  if(!isvalid) {
+    c.status(403);
+    return c.json({ error: "Invalid request" });
+  }
 
   if (!body.title) {
     return c.json(
