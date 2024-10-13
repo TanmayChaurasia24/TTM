@@ -1,9 +1,0 @@
-name = "ttm"
-main = "src/index.ts"
-compatibility_date = "2024-10-12"
-compatibility_flags = [ "nodejs_compat" ]
-
-[vars]
-DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiNDgzMTk0MzUtZDhkYS00NTJjLWIyODMtNDdlZmI3MGEwZDQ2IiwidGVuYW50X2lkIjoiOTQzZDE5Y2NhYzdiODJmNzdhMTliZDNmMTcyMjVlNWRlYWFmZjI3OTBhNzU1N2I5ZmNjYzQ0ZDk1N2I2YjBjYiIsImludGVybmFsX3NlY3JldCI6ImZlNTAwYmFlLTc2MTAtNDdhNy1iNWIxLThkYmJlOTFiNzQyYSJ9.xbuuVxgQIsTsVhxn_3NHoZFkodoobDZ1MZ9QzXTHDqo"
-JWT_SECRET="khjdsgfjkh8y80342bgfhksh7842gty79bdkgbvcHDGSHdbfskh"
-
