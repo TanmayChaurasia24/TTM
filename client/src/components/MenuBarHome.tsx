@@ -8,6 +8,8 @@ import {
   IconNewSection,
   IconTerminal2,
 } from "@tabler/icons-react";
+import { FaBookOpenReader } from "react-icons/fa6";
+import { TfiWrite } from "react-icons/tfi";
 
 export function FloatingDockDemo() {
   const links = [
@@ -21,7 +23,7 @@ export function FloatingDockDemo() {
     {
       title: "Read blogs",
       icon: (
-        <IconHome className="h-full w-full text-neutral-300" />
+        <FaBookOpenReader color="white"/>
       ),
       href: "/bulk",
     },
@@ -43,12 +45,7 @@ export function FloatingDockDemo() {
     {
       title: "Write",
       icon: (
-        <img
-          src="https://assets.aceternity.com/logo-dark.png"
-          width={20}
-          height={20}
-          alt="Aceternity Logo"
-        />
+          <TfiWrite color="white"></TfiWrite>
       ),
       href: "/create",
     },
@@ -68,7 +65,7 @@ export function FloatingDockDemo() {
     },
   ];
   return (
-    <div className="flex items-center justify-center h-[35rem] w-full">
+    <div className="flex items-center justify-center w-full">
       <FloatingDock
         mobileClassName="translate-y-20" // only for demo, remove for production
         items={links}
