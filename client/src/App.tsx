@@ -4,6 +4,7 @@ import Signup from "./pages/Signup"
 import Login from "./pages/Login"
 import WriteBlog from "./pages/WriteBlog"
 import Allpost from "./pages/Allpost"
+import Connect from "./pages/Connect"
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
           <Route path="/login" element={<Login></Login>}></Route>
           <Route path="/create" element={<WriteBlog></WriteBlog>}></Route>
           <Route path="/bulk" element={<Allpost></Allpost>}></Route>
+          <Route path="/connect" element={<Connect></Connect>}></Route>
         </Routes>
       </BrowserRouter>
     </>
