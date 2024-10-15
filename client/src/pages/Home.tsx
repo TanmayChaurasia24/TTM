@@ -1,7 +1,5 @@
-import { Spotlight } from "../components/ui/spotlight";
+import { Spotlight } from "../components/ui/Spotlight";
 import { FloatingDockDemo } from "../components/MenuBarHome";
-import React from "react";
-import { cn } from "../lib/utils";
 
 export function SpotlightPreview() {
   return (

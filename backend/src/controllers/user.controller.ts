@@ -11,6 +11,9 @@ export const signup = async (c: Context) => {
   const body = await c.req.json();
   const isvalid = signupInput.safeParse(body);
 
+  console.log(isvalid);
+  
+
   if(!isvalid) {
     c.status(403)
     return c.json({ error: "Invalid input" });
@@ -34,13 +37,19 @@ export const signup = async (c: Context) => {
   try {
     const created_user = await prisma.user.create({
       data: {
-        email: body.email,
-        password: body.password,
-        username: body.username,
+        email: isvalid.data?.email || "",
+        password: isvalid.data?.password || "",
+        username: isvalid.data?.username || "",
       },
     });
 
+    console.log(created_user);
+    
+
     const token = await sign({ id: created_user.id }, c.env.JWT_SECRET);
+
+    console.log(token);
+    
 
     return c.json({ message: "User created successfully", jwt: token });
   } catch (error: any) {
@@ -53,7 +62,7 @@ export const signin = async (c: Context) => {
     datasourceUrl: c.env?.DATABASE_URL,
   }).$extends(withAccelerate());
   const body = await c.req.json();
-  const isvalid = signupInput.safeParse(body);
+  const isvalid = signinInput.safeParse(body);
 
   if(!isvalid) {
     c.status(403)
