@@ -5,7 +5,7 @@ import { ThreeDCardDemo } from "../components/Jobcard";
 const Jobposting = () => {
   return (
     <>
-      <nav className="bg-neutral-800 text-white flex justify-between items-center h-[10vh] p-5 fixed top-0 left-auto right-auto transform  w-full z-50">
+      <nav className="bg-neutral-950 text-white flex justify-between items-center h-[10vh] p-5 fixed top-0 left-auto right-auto transform  w-full z-50">
         <div className="logo font-bold text-2xl">Tomorrow Tech Code(TTC)</div>
         <div className="flex justify-center items-center gap-x-5">
           <div className="flex justify-center items-center gap-2">

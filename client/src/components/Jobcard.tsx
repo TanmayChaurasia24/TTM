@@ -26,9 +26,9 @@ export function ThreeDCardDemo(props:any) {
           <CardItem
             as="p"
             translateZ="60"
-            className="text-sm max-w-sm mt-2 text-neutral-300"
+            className="text-sm max-w-sm mt-2 font-bold text-green-600"
           >
-            stipend: {props.stipend}
+            {props.stipend}
           </CardItem>
           <CardItem
             as="p"
