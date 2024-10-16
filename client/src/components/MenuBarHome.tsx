@@ -54,7 +54,7 @@ export function FloatingDockDemo() {
       icon: (
         <IconExchange className="h-full w-full text-neutral-300" />
       ),
-      href: "#",
+      href: "/connect",
     },
     {
       title: "GitHub",

@@ -5,6 +5,7 @@ import Login from "./pages/Login"
 import WriteBlog from "./pages/WriteBlog"
 import Allpost from "./pages/Allpost"
 import Connect from "./pages/Connect"
+import Jobposting from "./pages/Jobposting"
 function App() {
   return (
     <>
@@ -16,6 +17,7 @@ function App() {
           <Route path="/create" element={<WriteBlog></WriteBlog>}></Route>
           <Route path="/bulk" element={<Allpost></Allpost>}></Route>
           <Route path="/connect" element={<Connect></Connect>}></Route>
+          <Route path="/jobs" element={<Jobposting></Jobposting>}></Route>
         </Routes>
       </BrowserRouter>
     </>

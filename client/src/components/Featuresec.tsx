@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { PinContainer } from "./ui/3d-pin";
-import coder from "../assets/chris-ried-ieic5Tq8YMk-unsplash.jpg";
+
 
 export function AnimatedPinDemo(props: {
   title: string | undefined;
