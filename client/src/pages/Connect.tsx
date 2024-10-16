@@ -60,7 +60,7 @@ const Connect = () => {
         <div className="text-neutral-200 text-center font-extrabold text-6xl">
           Latest Opportunities
         </div>
-        <div className="grid grid-cols-3 gap-8 justify-items-center">
+        <div className="grid grid-cols-3 gap-8 justify-items-center mb-10">
           <ThreeDCardDemo
             post="Travel blogger"
             company="wanderlust magzine"

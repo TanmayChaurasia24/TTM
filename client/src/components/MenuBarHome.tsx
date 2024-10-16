@@ -10,6 +10,7 @@ import {
 } from "@tabler/icons-react";
 import { FaBookOpenReader } from "react-icons/fa6";
 import { TfiWrite } from "react-icons/tfi";
+import { Target } from "lucide-react";
 
 export function FloatingDockDemo() {
   const links = [
@@ -61,7 +62,7 @@ export function FloatingDockDemo() {
       icon: (
         <IconBrandGithub className="h-full w-full text-neutral-300" />
       ),
-      href: "#",
+      href: "https://github.com/TanmayChaurasia24/TTM",
     },
   ];
   return (

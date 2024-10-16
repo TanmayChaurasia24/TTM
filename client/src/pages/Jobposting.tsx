@@ -1,6 +1,7 @@
 import { IoSearch } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
 import { ThreeDCardDemo } from "../components/Jobcard";
+import { FloatingDockDemo } from "../components/MenuBarHome";
 
 const Jobposting = () => {
   return (
@@ -56,26 +57,29 @@ const Jobposting = () => {
           location="india"
         />
         <ThreeDCardDemo
-          post="food blogger"
-          company="mithas"
-          type="contract based"
-          stipend="$140/day"
+          post="Travel blogger"
+          company="wanderlust magzine"
+          type="freelance"
+          stipend="$100/hr"
           location="india"
         />
         <ThreeDCardDemo
-          post="food blogger"
-          company="mithas"
-          type="contract based"
-          stipend="$140/day"
+          post="Travel blogger"
+          company="wanderlust magzine"
+          type="freelance"
+          stipend="$100/hr"
           location="india"
         />
         <ThreeDCardDemo
-          post="food blogger"
-          company="mithas"
-          type="contract based"
-          stipend="$140/day"
+          post="Travel blogger"
+          company="wanderlust magzine"
+          type="freelance"
+          stipend="$100/hr"
           location="india"
-        />
+        />        
+      <div className="bottom-1 left-1/2  fixed transform -translate-x-1/2 z-50">
+        <FloatingDockDemo/>
+      </div>
 
       </div>
     </>
