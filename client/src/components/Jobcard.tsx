@@ -1,6 +1,5 @@
 "use client";
 
-import { FloatingDockDemo } from "./MenuBarHome";
 import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
 
 export function ThreeDCardDemo(props: any) {

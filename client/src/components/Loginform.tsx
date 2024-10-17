@@ -1,43 +1,91 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { cn } from "../lib/utils";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+interface loginput {
+  email: string;
+  password: string;
+}
+
 export function SignupFormDemo() {
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      console.log("Form submitted");
-    };
-  
-    return (
-      <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-black">
-        <h2 className="font-bold text-xl text-neutral-200">Welcome to TTC</h2>
-        <form className="my-8" onSubmit={handleSubmit}>
-          <LabelInputContainer className="mb-4">
-            <Label htmlFor="email" className="text-white">Email Address</Label>
-            <Input id="email" placeholder="projectmayhem@fc.com" type="email" />
-          </LabelInputContainer>
-          <LabelInputContainer className="mb-4">
-            <Label htmlFor="password" className="text-white">Password</Label>
-            <Input id="password" placeholder="••••••••" type="password" />
-          </LabelInputContainer>
-          <LabelInputContainer className="mb-8">
-            <Label htmlFor="confirmPassword" className="text-white">Confirm Password</Label>
-            <Input id="confirmPassword" placeholder="••••••••" type="password" />
-          </LabelInputContainer>
-  
-          <button
-            className="bg-gradient-to-br relative group/btn from-zinc-900 to-zinc-900 block bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-            type="submit"
-          >
-            Sign in &rarr;
-            <BottomGradient />
-          </button>
-        </form>
-      </div>
-    );
-  }
-  
+  const [postinput, setpostinput] = useState<loginput>({
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent default form behavior
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/user/signin`,
+        postinput
+      );
+      console.log(response);
+      const jwt = response.data.jwt;
+      console.log(jwt);
+      localStorage.setItem("token", jwt);
+      navigate("/blogs");
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+
+  const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setpostinput({ ...postinput, [e.target.id]: e.target.value });
+  };
+
+  return (
+    <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-black">
+      <h2 className="font-bold text-xl text-neutral-200">Welcome to TTC</h2>
+      <form className="my-8" onSubmit={handleSubmit}>
+        <LabelInputContainer className="mb-4">
+          <Label htmlFor="email" className="text-white">
+            Email Address
+          </Label>
+          <Input
+            id="email"
+            placeholder="projectmayhem@fc.com"
+            type="email"
+            value={postinput.email}
+            onChange={onchange}
+          />
+        </LabelInputContainer>
+        <LabelInputContainer className="mb-4">
+          <Label htmlFor="password" className="text-white">
+            Password
+          </Label>
+          <Input
+            id="password"
+            placeholder="••••••••"
+            type="password"
+            value={postinput.password}
+            onChange={onchange}
+          />
+        </LabelInputContainer>
+        <LabelInputContainer className="mb-8">
+          <Label htmlFor="confirmPassword" className="text-white">
+            Confirm Password
+          </Label>
+          <Input id="confirmPassword" placeholder="••••••••" type="password" />
+        </LabelInputContainer>
+
+        <button
+          className="bg-gradient-to-br relative group/btn from-zinc-900 to-zinc-900 block bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+          type="submit"
+        >
+          Sign in &rarr;
+          <BottomGradient />
+        </button>
+      </form>
+    </div>
+  );
+}
+
 const BottomGradient = () => {
   return (
     <>
