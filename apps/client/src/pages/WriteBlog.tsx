@@ -1,16 +1,55 @@
-import React, { useState } from 'react'
-import { Eye, EyeOff } from 'lucide-react'
-import { FloatingDockDemo } from '../components/MenuBarHome'
+import React, { useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
+import { FloatingDockDemo } from '../components/MenuBarHome';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode'; // Fix: Use named import
 
 export default function BlogWriter() {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-  const [tags, setTags] = useState('')
-  const [showPreview, setShowPreview] = useState(false)
+  const navigate = useNavigate();
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [showPreview, setShowPreview] = useState(false);
 
-  const handleSave = () => {
-    console.log('Saving blog post:', { title, content, tags })
+  // Decode JWT to extract authorId
+  const token = localStorage.getItem('token'); 
+  let authorId: string | null = null;
+  if (token) {
+    const decoded: any = jwtDecode(token);
+    authorId = decoded.id
   }
+
+  const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    console.log(authorId);
+    
+
+    if (!authorId) {
+      console.error('No valid authorId found');
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://127.0.0.1:8787/api/b/blogs", {
+        title,
+        content,
+        authorId, 
+      },
+      {
+        headers: {
+          Authorization: `${token}` 
+        }
+      }
+    );
+      console.log('Blog saved successfully', response.data);
+      setTitle("");
+      setContent("");
+      navigate("/bulk");
+    } catch (error: any) {
+      console.log('Error while writing the blog from client: ', error);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-neutral-950 text-gray-100 p-4">
@@ -37,22 +76,12 @@ export default function BlogWriter() {
           />
         </div>
 
-        <div className="mb-6">
-          <input
-            type="text"
-            placeholder="Enter tags (comma-separated)"
-            value={tags}
-            onChange={(e) => setTags(e.target.value)}
-            className="w-full bg-neutral-800 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-600"
-          />
-        </div>
-
         <div className="flex justify-between items-center mb-6">
           <button
-            onClick={handleSave}
+            type="submit"  // Use type="submit" for form submission
+            onClick={handleSave} // Call the handleSave function
             className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300 flex items-center"
           >
-            <div className="mr-2" />
             Save Draft
           </button>
           <button
@@ -82,21 +111,12 @@ export default function BlogWriter() {
                 <p key={index} className="mb-4">{paragraph}</p>
               ))}
             </div>
-            {tags && (
-              <div className="mt-4">
-                {tags.split(',').map((tag, index) => (
-                  <span key={index} className="inline-block bg-gray-700 rounded-full px-3 py-1 text-sm font-semibold text-gray-200 mr-2 mb-2">
-                    {tag.trim()}
-                  </span>
-                ))}
-              </div>
-            )}
           </div>
         )}
       </div>
       <div className='bottom-3 left-1/2 -translate-x-1/2 transform fixed'>
-        <FloatingDockDemo/>
+        <FloatingDockDemo />
       </div>
     </div>
-  )
+  );
 }

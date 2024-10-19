@@ -19,17 +19,17 @@ export function SignupFormDemo() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent default form behavior
+    e.preventDefault(); 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/user/signin`,
+        `http://127.0.0.1:8787/api/user/signin`,
         postinput
       );
       console.log(response);
       const jwt = response.data.jwt;
       console.log(jwt);
       localStorage.setItem("token", jwt);
-      navigate("/blogs");
+      navigate("/bulk");
     } catch (error: any) {
       console.log(error.message);
     }
@@ -67,13 +67,6 @@ export function SignupFormDemo() {
             onChange={onchange}
           />
         </LabelInputContainer>
-        <LabelInputContainer className="mb-8">
-          <Label htmlFor="confirmPassword" className="text-white">
-            Confirm Password
-          </Label>
-          <Input id="confirmPassword" placeholder="••••••••" type="password" />
-        </LabelInputContainer>
-
         <button
           className="bg-gradient-to-br relative group/btn from-zinc-900 to-zinc-900 block bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
           type="submit"

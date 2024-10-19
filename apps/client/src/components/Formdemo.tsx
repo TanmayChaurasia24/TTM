@@ -31,7 +31,7 @@ export function SignupFormDemo() {
       const jwt = response.data.jwt;
       console.log(jwt);
       localStorage.setItem("token", jwt);
-      navigate("/blogs");
+      navigate("/bulk");
     } catch (error) {
       console.error("Error during signup:", error); 
     }
