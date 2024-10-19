@@ -43,7 +43,7 @@ const Allpost = () => {
           <BackgroundGradientDemo
             title={blog.title}
             content={blog.content}
-            source=""
+            source={kafka}
             Author="tanmay"
           />
         ))}

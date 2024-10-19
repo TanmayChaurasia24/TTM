@@ -6,6 +6,8 @@ import WriteBlog from "./pages/WriteBlog"
 import Allpost from "./pages/Allpost"
 import Connect from "./pages/Connect"
 import Jobposting from "./pages/Jobposting"
+import Logoutpage from "./pages/Logoutpage"
+import Profile from "./pages/Profile"
 function App() {
   return (
     <>
@@ -18,6 +20,8 @@ function App() {
           <Route path="/bulk" element={<Allpost></Allpost>}></Route>
           <Route path="/connect" element={<Connect></Connect>}></Route>
           <Route path="/jobs" element={<Jobposting></Jobposting>}></Route>
+          <Route path="/logout" element={<Logoutpage></Logoutpage>}></Route>
+          <Route path="/profile" element={<Profile></Profile>}></Route>
         </Routes>
       </BrowserRouter>
     </>
