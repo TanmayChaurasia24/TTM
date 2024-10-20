@@ -45,6 +45,7 @@ const Allpost = () => {
             content={blog.content}
             source={kafka}
             Author="tanmay"
+            blogid={blog.id}
           />
         ))}
       </div>

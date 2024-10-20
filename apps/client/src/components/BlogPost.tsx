@@ -1,11 +1,16 @@
 "use client";
-
+import { useNavigate } from "react-router-dom";
 export function BackgroundGradientDemo(props: {
   source: string | undefined;
   title: string;
   content: string;
   Author: string;
+  blogid: string;
 }) {
+  const navigate = useNavigate();
+  const handleblog = () => {
+    navigate(`/blog/${props.blogid}`)
+  };
   return (
     <div>
       <div className="rounded-[22px] max-w-sm p-4 sm:p-10 bg-zinc-900 border border-white h-[30rem] flex justify-between flex-col items-center">
@@ -19,22 +24,24 @@ export function BackgroundGradientDemo(props: {
           />
         </div>
         <div className="">
-          <p className="text-base sm:text-xl text-neutral-200">
-            {props.title}
+          <p className="text-base sm:text-xl text-neutral-200 mt-4">
+            {props.title.length > 50
+              ? props.title.substring(0, 50) + "..."
+              : props.title}
           </p>
 
-          <p className="text-sm text-neutral-400">
+          <p className="mt-2 text-sm text-neutral-400">
             {props.content.length > 200
               ? props.content.substring(0, 200) + "..."
               : props.content}
           </p>
         </div>
-        <div className="">
-          <button className="rounded-full pl-4 pr-1 py-1 text-white flex items-center space-x-1 bg-black mt-4 text-xs font-bold dark:bg-zinc-800">
-            <span>Author </span>
-            <span className="bg-zinc-700 rounded-full text-[0.6rem] px-2 py-0 text-white">
-              {props.Author}
-            </span>
+        <div className="flex justify-center items-center gap-4">
+          <button
+            className="rounded-full p-2 mt-3 text-white flex items-center text-xs font-bold bg-blue-500 justify-center"
+            onClick={handleblog}
+          >
+            Read More
           </button>
         </div>
       </div>
