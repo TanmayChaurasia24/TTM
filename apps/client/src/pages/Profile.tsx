@@ -84,11 +84,6 @@ const Profile = () => {
       <div className="flex justify-center items-center h-[100vh]">
         <div className="h-[100%] overflow-auto w-[20vw]">
           <div className="flex justify-center items-center flex-col mt-8">
-            <img
-              src=""
-              className="bg-green-400 h-[15rem] w-[15rem] rounded-[100%]"
-              alt="Profile"
-            ></img>
             <div className="flex flex-col justify-center items-center gap-4">
               <h1 className="text-3xl font-bold">Profile</h1>
               <div><span className="font-bold">Username:</span> {userdetail?.username}</div>

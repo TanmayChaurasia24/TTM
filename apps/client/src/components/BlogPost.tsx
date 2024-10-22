@@ -1,7 +1,6 @@
 "use client";
 import { useNavigate } from "react-router-dom";
 export function BackgroundGradientDemo(props: {
-  source: string | undefined;
   title: string;
   content: string;
   Author: string;
@@ -11,18 +10,10 @@ export function BackgroundGradientDemo(props: {
   const handleblog = () => {
     navigate(`/blog/${props.blogid}`)
   };
+  // 6d0be5d2016b4f0c8f52be294656ed94
   return (
     <div>
-      <div className="rounded-[22px] max-w-sm p-4 sm:p-10 bg-zinc-900 border border-white h-[30rem] flex justify-between flex-col items-center">
-        <div className="">
-          <img
-            src={props.source}
-            alt="jordans"
-            height={400}
-            width={400}
-            className="object-contain"
-          />
-        </div>
+      <div className="rounded-[22px] max-w-sm p-4 sm:p-10 bg-zinc-900 border border-white h-[17rem] flex justify-evenly flex-col items-center">
         <div className="">
           <p className="text-base sm:text-xl text-neutral-200 mt-4">
             {props.title.length > 50
@@ -32,7 +23,7 @@ export function BackgroundGradientDemo(props: {
 
           <p className="mt-2 text-sm text-neutral-400">
             {props.content.length > 200
-              ? props.content.substring(0, 200) + "..."
+              ? props.content.substring(0, 100) + "..."
               : props.content}
           </p>
         </div>

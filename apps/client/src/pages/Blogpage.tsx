@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FloatingDockDemo } from '../components/MenuBarHome';
+import ReactMarkdown from 'react-markdown';
 
 interface typeblog {
     id: string,
@@ -42,7 +43,7 @@ const Blogpage = () => {
       <div className='flex flex-col justify-center items-center gap-4 p-7 mb-16'>
         <div className='text-4xl fixed top-1 mb-10'>{blogpost?.title}</div>
         <hr />
-        <div className='w-[70vw] mt-4 h-[80vh] overflow-auto'>{blogpost?.content}</div>
+        <ReactMarkdown className='w-[70vw] mt-4 h-[80vh] overflow-auto'>{blogpost?.content}</ReactMarkdown>
       </div>
       <div className='bottom-4 transform -translate-x-1/2 left-1/2 fixed'>
       <FloatingDockDemo/>
