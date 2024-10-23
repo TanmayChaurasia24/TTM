@@ -1,7 +1,6 @@
 "use client";
 import { FloatingDockDemo } from "../components/MenuBarHome";
 import { BackgroundGradientDemo } from "../components/BlogPost";
-import kafka from "../assets/chris-ried-ieic5Tq8YMk-unsplash.jpg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -17,7 +16,7 @@ const Allpost = () => {
   useEffect(() => {
     const fetchblogs = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8787/api/b/blogs",{
+        const response = await axios.get("https://backend.kuamrchaurasiatanmay.workers.dev/api/b/blogs",{
           headers: {
             Authorization: `${token}`
           }

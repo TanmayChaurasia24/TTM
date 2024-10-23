@@ -1,4 +1,3 @@
-import { title } from "process";
 import { FloatingDock } from "./ui/floating-dock";
 import {
   IconBrandGithub,

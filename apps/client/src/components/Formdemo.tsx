@@ -24,7 +24,7 @@ export function SignupFormDemo() {
     e.preventDefault();   
     try {
       const response = await axios.post(
-        `http://127.0.0.1:8787/api/user/signup`,
+        `https://backend.kuamrchaurasiatanmay.workers.dev/api/user/signup`,
         forminput
       );
       console.log(response);
