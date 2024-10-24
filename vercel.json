@@ -1,11 +1,17 @@
 {
-  "projects": [
+  "builds": [
     {
-      "src": "apps/client", 
-      "use": "@vercel/static-build",  
+      "src": "apps/client/package.json",
+      "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"  
+        "distDir": "dist"
       }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "apps/client/$1"
     }
   ]
 }
